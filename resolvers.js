@@ -14,8 +14,8 @@ const resolvers = {
 		},
 	},
 	Mutation: {
-		addBook: (_, { title, author }) => {
-			books.addBook = { title, author }
+		addBook: (_, { book }) => {
+			books.addBook = book
 			pubsub.publish(TOPIC, { newBookList: books.getBooks })
 			return books.getBooks
 		},
