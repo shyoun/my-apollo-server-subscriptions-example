@@ -26,6 +26,7 @@ const typeDefs = gql`
 
 	type Subscription {
 		newBookList: [Book]
+		lastBook: Book
 	}
 `
 

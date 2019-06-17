@@ -1,3 +1,6 @@
+import { PubSub } from 'apollo-server'
+import { TOPIC_LAST_BOOK } from './../constans'
+
 class Books {
 	constructor() {
 		this.books = [
@@ -10,6 +13,8 @@ class Books {
 				author: 'Michael Crichton',
 			},
 		]
+
+		this.pubsub = new PubSub()
 	}
 
 	get getBooks() {
@@ -18,7 +23,13 @@ class Books {
 
 	set addBook(book) {
 		this.books = [ ...this.books, book ]
+		this.pubsub.publish(TOPIC_LAST_BOOK, { lastBook: book })
+
 		return this.books
+	}
+
+	lastBookSubscribe() {
+		return this.pubsub.asyncIterator(TOPIC_LAST_BOOK)
 	}
 }
 

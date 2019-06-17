@@ -24,6 +24,9 @@ const resolvers = {
 		newBookList: {
 			subscribe: () => pubsub.asyncIterator([ TOPIC ]),
 		},
+		lastBook: {
+			subscribe: () => books.lastBookSubscribe(),
+		},
 	},
 }
 
